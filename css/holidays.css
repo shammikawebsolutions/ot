@@ -1,0 +1,38 @@
+@CHARSET "ISO-8859-1";
+#my_holiday_table
+{
+	
+}
+#my_holiday_table td
+{
+	background-image: url("../images/menu_option.png");
+	background-repeat: no-repeat;
+	width:150px;
+	height:130px;	
+}
+#my_holiday_table td div
+{
+	height:120px;
+	position: relative;
+	top:-5px;
+}
+#my_holiday_table td div h3
+{
+	font-size: 14px;
+	margin-bottom:10px;
+}
+#my_holiday_table td div span
+{
+	display: block;
+	clear: both;
+	color:#56BFB8;
+	text-decoration: underline;
+	padding:5px 0;
+	font-size: 80%
+}
+#my_holiday_table td div p
+{
+	color:#121011;
+	font-size: 80%;
+	font-style: normal;
+}

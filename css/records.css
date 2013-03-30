@@ -1,0 +1,46 @@
+@CHARSET "ISO-8859-1";
+.ui-progressbar .ui-progressbar-value 
+{ 
+    background-image: url("../images/pbar-ani.gif"); 
+}
+#progressbar
+{
+    height:6px;
+}
+.view_record_file_playback
+{
+    display:block;
+}
+.play_buttons_bar
+{
+    background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #999), color-stop(0.02, #666), color-stop(1, #222));
+}
+.play_buttons_bar a
+{
+    display:block;
+    float:left;
+    width:30px;
+    height:30px;
+    border-radius:3px;
+    border:1px solid #000;
+    margin:5px;
+    text-align:center;
+}
+.play_recording h1
+{
+    margin:5px !important;
+    color:white !important;
+}
+.play_recording 
+{
+	color:#fff;
+    background-color:gray;
+    position:absolute; 
+    z-index:2;
+    bottom:0px; 
+    left:0;
+    width:100%;
+    overflow:hidden;
+    padding:5px 10px;
+    border-top:1px solid #444;
+}

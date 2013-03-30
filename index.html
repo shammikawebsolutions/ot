@@ -1,0 +1,1541 @@
+<html>
+    <head>
+        <title>OneTimetable</title>
+        
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+       	<style type="text/css" media="screen">@import "themes/css/vanilla.css";</style>
+       	<link type="text/css" rel="stylesheet" media="screen" href="css/reset.css" />
+        <link type="text/css" rel="stylesheet" media="screen" href="css/style.css" />
+        <link type="text/css" rel="stylesheet" media="screen" href="css/subject.css" />
+        <link type="text/css" rel="stylesheet" media="screen" href="css/timetable.css" />
+        <link type="text/css" rel="stylesheet" media="screen" href="css/exams.css" />  
+        <link type="text/css" rel="stylesheet" media="screen" href="css/holidays.css" />
+        <link type="text/css" rel="stylesheet" media="screen" href="css/tasks.css" />
+       	<link type="text/css" rel="stylesheet" media="screen" href="css/home.css" />
+       	<link type="text/css" rel="stylesheet" media="screen" href="css/records.css" />
+       	<link type="text/css" rel="stylesheet" media="screen" href="css/school.css" />
+                
+		<link type="text/css" rel="stylesheet" media="screen" href="css/spinningwheel.css"  />
+		<link rel="stylesheet" media="screen" type="text/css" href="css/colorpicker.css" />
+		
+		<link rel='stylesheet' type='text/css' href='css/jquery.weekcalendar.css' />
+		
+        <link href='http://fonts.googleapis.com/css?family=Quantico' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />        
+		
+		<link rel='stylesheet' type='text/css' href='js/fullcalendar/fullcalendar.css' />
+		<link rel='stylesheet' type='text/css' href='js/fullcalendar/fullcalendar.print.css' media='print' />
+       	<link rel="stylesheet" type="text/css" media="screen" href="css/work_schedule.css" />
+
+ 		<link rel="stylesheet" type="text/css" href="css/farbtastic.css" />
+        <style type="text/css" media="screen">@import "css/jqt.calendar.css";</style>
+        <script src="src/lib/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="src/jqtouch.min.js" type="text/javascript" charset="utf-8"></script>
+    	<script src="cordova-2.4.0.js" type="text/javascript" charset="utf-8"></script>
+
+		<script>
+	        var jQT=$.jQTouch
+	        ({
+	            icon			: 'icon.png',
+	            statusBar		: 'black',
+	            addGlossToIcon	: false,
+	            startupScreen	: 'startup.png'
+	        });
+        </script>
+        
+        <script src="js/jquery-1.8.1.min.js" type="text/javascript" charset="utf-8"></script>       
+        <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js" charset="utf-8"></script>
+        
+		<script type='text/javascript' src='js/jquery.weekcalendar.js' charset="utf-8"></script>
+                    
+        <script src="js/spinningwheel-min.js?v=1.4" type="text/javascript"></script>
+        
+        <script src="js/farbtastic.js" type="text/javascript" charset="utf-8"></script>
+        
+		<script type='text/javascript' src='js/fullcalendar/fullcalendar.js' charset="utf-8"></script>
+
+        <script src="js/date.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/ads.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+            
+        <!--Local notification JS files -->
+        <script src="js/notf.js" type="text/javascript"></script>
+        <script src="js/LocalNotification.js" type="text/javascript"></script>
+
+        
+        <script type="text/javascript">
+	        var db;
+        	var user_id=1;
+	        
+        	//bundle identifier - com.shammika.onetimetable.OneTimetable
+        	
+	        $(document).ready(function()
+	     	{
+	        	var shortName='OT';
+	        	var version='1.0';
+	        	var displayName='OT';
+	        	var maxSize=65536;
+	        	db=openDatabase(shortName,version,displayName,maxSize);
+
+	        	$("#study_plan a").click(function()
+	        	{
+	        		$("#work_schedule_div h1").html("Study Plan");
+	        		$("#work_schedule_add_button").attr("href","#add_new_study_plan");
+	        	});
+	        	
+	        	$("#work_schedule a").click(function()
+	        	{
+	        		$("#work_schedule_div h1").html("Work Schedule");
+	        		$("#work_schedule_add_button").attr("href","#add_work_schedule");
+	        	});
+	        	
+	        	$("#faq").click(function()
+	        	{
+	        		var faq = window.open("http://www.onetimetable.com/user-guide",'_blank','location=yes');
+	        	});
+	        	
+	        	$("#terms_of_use").click(function()
+	        	{
+	        		var terms_of_use = window.open("http://www.onetimetable.com/terms-and-conditions",'_blank','location=yes');
+	        	});
+	     		
+	        	setInterval
+	        	(
+	        		function()
+	        		{
+	        			$("#timetable ul").html("<li><img src='images/loading.gif' /></li>");
+	        			alert("running");
+	        			populate_time_table_list();
+	        		}
+	        		,600000
+	        	);
+	        	
+	        	$(".paid_ad").click(function()
+	        	{
+	        		var href=$(this).find("img").attr('href');
+	        		var faq=window.open(href,'_blank','location=yes');
+	        	});
+	      	});
+	        
+	    </script>
+        
+		<script src="js/create-tables.js" type="text/javascript"></script>	
+		<script src="js/subjects.js" type="text/javascript"></script>			
+       	<script src="js/work_schedule.js" type="text/javascript"></script>
+        <script type="text/javascript">
+	        function onLoad() 
+	        {
+	       		document.addEventListener("deviceready", onDeviceReady, false);
+	        }
+
+        	function onDeviceReady() 
+        	{
+        	  // Register the event listener
+        	  //document.addEventListener("pause", onPause, false);
+        	  document.addEventListener("resume", onResume, false);
+        	  //document.addEventListener("online", onOnline, false);
+        	  //document.addEventListener("offline", onOffine, false);
+        	  
+        	  //navigator.splashscreen.show();
+	        }
+
+        	function onPause() 
+        	{
+        	  //alert("I've been paused");
+        	}
+        	
+        	function onOnline()
+        	{
+        		//alert("online");
+        	}
+        	function onOffine()
+        	{
+        		//alert("offline");
+        	}
+
+        	function onResume() 
+        	{
+        		//alert("resume");
+        		var width=$(window).width();
+        	    var window_height=$(window).height()-30;
+        		
+        	    var table_height=$("#home_page_1").height();
+        	    var id_name='';
+        	    
+        	    var paid_ad_slots=new Array
+        	    (
+        	    	"home_page_wrapper_ad",
+        	    	"my_holidays_list_wrapper_ad",
+        	    	"my_exams_list_wrapper_ad",
+        	    	"my_subjects_list_wrapper_ad",
+        	    	"my_task_list_wrapper_ad",
+        	    	"my_task_list_list_wrapper_ad",
+        	    	"work_schedule_calendar_events_wrapper_ad",
+        	    	"timetable_week_wrapper_ad",
+        	    	"timetable_day_wrapper_ad",
+        	    	"timetable_list_wrapper_ad",
+        	    	"my_library_books_list_wrapper_ad",
+        	    	"study_plan_calendar_events_wrapper_ad"
+        	    );
+        	    
+        	    $.each(paid_ad_slots,function(i,val) 
+        		{
+        	    	$("#"+paid_ad_slots[i]).css('height','0px');
+        			id_name=paid_ad_slots[i].replace("_ad","");
+        			$("#"+id_name).addClass("full_extended_wrapper");
+        		});
+        	    
+        	    function jsonp_callback(response)
+        	    {
+        			response=JSON.parse(response);
+        	        try // try to output this to the javascript console
+        	        {
+        	        	$.each(response,function(i,item)
+        	        	{
+        	        		//alert(item.type+"-"+item.url);
+        	    			$("#"+item.type).css('height','60px');
+        	    			id_name=item.type.replace("_ad","");
+        	    			$("#"+id_name).removeClass("full_extended_wrapper");
+        	    			
+        	    			$("#"+item.type).html("<img href='"+item.url+"' src='http://www.onetimetable.com/ads/"+item.image+"' />");
+        		    		$("#"+item.type+" img").css("width",width);
+        	        	});
+        	        }
+        	        catch(an_exception) // alert for the users that don't have a javascript console
+        	        {
+        	        	console.log('product id ' + response.item_id + ': quantity = ' + response.quantity + ' & price = ' + response.price);
+        	        }
+        	    }
+
+        		$.ajax
+        		({
+        			url				: 	'http://www.onetimetable.com/json/ads.php?callback=?',
+        			type			: 	"GET",
+        		    dataType		: 	"jsonp",
+        		    async			:	false,
+        		    jsonpCallback	: 	'jsonp_callback',
+        		    contentType		: 	"application/json",
+        		    
+        			beforeSend		:	function()
+        			{
+        				//alert("beforeSend");
+        			},
+        	    	success			: 	function(data)
+        	    	{
+        	    		jsonp_callback(data);
+        				
+        	    	},
+        	    	error			: 	function(jqXHR, textStatus, errorThrown) 
+        	    	{   
+        	             console.log('Error Message: '+textStatus);
+        	             console.log('HTTP Error: '+errorThrown);
+        	        },
+        		});
+        	    
+        	    populate_time_table_list();
+        	    
+        	    find_first_subject();
+        	}
+        </script>
+            
+    </head>
+    
+    <body onload="onLoad()">
+    	<div id="jqt">
+            <div id="home" selected="true" class="edgetoedge form background">
+                <div class="toolbar">
+                    <h1>One Timetable</h1>
+                    <a class="button flip overide_button" id="home_settings" href="#settings"></a>
+                </div>
+                
+                <div class="wrapper" id="home_page_wrapper">
+                    <div class="scroller">
+		                <div id="home_page_1" class="touch">
+			                <table id="home_main_cells">
+				           		<tr>
+				           			<td class="ui-state-default" id="timetable">
+				           				<a href="#view_timetable_day" class="slideup">
+				           					<div>
+						           				<h2>Timetable</h2>				           			
+						           				<ul>
+						           					<li><img src='images/loading.gif' /></li>
+					           					</ul>
+					           				</div>
+					           			</a>       		
+				           			</td>
+				           			
+				           			<td class="ui-state-default" id="subjects">
+				           				<a href="#view_subjects" class="slideup">
+					           				<div>
+												<h2>Subject</h2>
+												<ul>
+						           					<li><img src='images/loading.gif' /></li>
+												</ul>
+											</div>
+										</a>
+									</td>
+				           		</tr>
+				           		
+				           		<tr>
+				           			<td class="ui-state-default" id="school_cell">
+				           				<a href="#add_new_school" id="school_first_a" class="slideup">
+					           				<div>
+						           				<h2>School</h2>
+						           				<div id="school_logo"></div>
+											</div>
+										</a>
+				           			</td>
+				           			
+				           			<td class="ui-state-default" id="recorder">
+				           				<a href="#view_records" class="create_new_record slideup">
+					           				<div>
+												<h2>Recorder</h2>
+												<img src="images/microphone.png" width="80" />
+											</div>
+										</a>
+									</td>
+				           		</tr>
+				           		
+				           		<tr>
+				           			<td class="ui-state-default" id="holiday">
+				           				<a href="#view_holidays" class="slideup">
+					           				<div>
+						           				<h2>Holiday</h2>
+												<div id="home_holidays_cell">
+													<img src='images/loading.gif' />
+												</div>
+											</div>
+										</a>
+				           			</td>
+				           			
+				           			<td class="ui-state-default" id="exams">
+				           				<a href="#view_exams" class="slideup">
+					           				<div>
+												<h2>Exams</h2>
+												<ul>
+						           					<li><img src='images/loading.gif' /></li>
+						           				</ul>
+											</div>
+										</a>
+									</td>
+				           		</tr>
+		
+				           		<tr>
+				           			<td class="ui-state-default" id="work_schedule">
+				           				<a href="#work_schedule_div" class="slideup">
+				           					<div>
+												<h2>Work Schedule</h2>
+												<ul>
+						           					<li><img src='images/loading.gif' /></li>
+						           				</ul>
+											</div>
+										</a>
+									</td>
+				           			
+				           			<td class="ui-state-default" id="task_list">
+				           				<a href="#view_tasks" class="slideup">
+					           				<div>
+												<h2>Task List</h2>
+												<ul>
+													<li><img src='images/loading.gif' /></li>
+												</ul>
+											</div>
+										</a>
+									</td>
+				           		</tr>
+				           		
+				           		<tr>
+				           			<td class="ui-state-default" id="library">
+				           				<a href="#view_library_books" class="slideup">
+					           				<div>
+						           				<h2>Library</h2>
+												<ul>
+						           					<li><img src='images/loading.gif' /></li>
+						           				</ul>
+											</div>
+										</a>
+				           			</td>
+				           			
+				           			<td class="ui-state-default" id="study_plan">
+				           				<a href="#work_schedule_div" class="slideup">
+				           					<div>
+												<h2>Study Plan</h2>
+												<ul>
+						           					<li><img src='images/loading.gif' /></li>
+						           				</ul>
+											</div>
+										</a>
+									</td>
+				           		</tr>
+			           		</table>
+			           	</div>
+			    	</div>
+			   	</div>
+	           	
+	           	<div id="home_page_wrapper_ad" class="paid_ad"></div> 
+	           	<div id="footer"></div>
+            </div>
+            
+            
+			<!-- ******************************* START OF SETTINGS ************************ -->
+            <div id="settings" class="form background">
+				<div class="toolbar">
+			    	<h1>Settings</h1>
+			        <a class="button back overide_button" href="#">Back</a>
+				</div>
+				
+				<div class="wrapper" id="settings_list_wrapper">
+                    <div class="scroller">
+			    		<div class="subject_placeholder_div">
+			    			<a href="#add_new_school"><div><div>School / University Website</div></div></a>
+			    			
+			    			<a id='faq' href="#"><div><div>User Guide / FAQs</div></div></a>
+			    			<a id="terms_of_use" href="#"><div><div>Terms & Conditions</div></div></a>
+			    		</div>
+			    	</div>
+			    </div>
+            </div>
+			<!-- ******************************* START OF SETTINGS ************************ -->
+
+			<!-- ******************************* START OF SCHOOL ************************ -->
+			<script src="js/school.js" type="text/javascript"></script>
+            <div id="add_new_school" class="form background">
+				<form>
+					<div class="toolbar">
+				    	<h1>Add School</h1>
+				        <a class="button back overide_button" href="#">Cancel</a>
+					</div>
+				              
+				    <ul class="rounded">
+			        	<li><input type="text" id="school_name" placeholder="School Name" /></li>
+					</ul>
+					       
+				    <ul class="rounded">
+			        	<li><input type="text" id="school_url" placeholder="School URL" /></li>
+					</ul>
+					
+					<ul class="rounded">
+			        	<li><textarea id="school_details" placeholder="Notes" cols="30" rows="1"></textarea></li>
+					</ul>
+					
+					<input type="submit" class="submit whiteButton" name="action" value="Save" />
+				</form>
+			</div>
+			<!-- ******************************* END OF SCHOOL ************************ -->
+			
+            <!-- ******************************* START OF HOLIDAY ************************ -->            
+			<script src="js/holidays.js" type="text/javascript"></script>
+			
+			<div id="holiday_color_picker_dialog" title="Pick Colour">
+				<div id="holiday_color_picker_div"></div>	
+			</div>	
+			
+			<div id="view_holidays" class="edit background">
+				<div id="delete_holiday_confirm" title="Remove Holiday?"></div>
+			
+				<div class="toolbar">
+			    	<a class="button back overide_button" href="#">Back</a>
+			        <h1>Holidays</h1>
+			        <a href="#add_new_holiday" id="add_new_holiday_button" class="button flip overide_button active" style="">Add</a>
+				</div>
+			    
+			    <div class="wrapper" id="my_holidays_list_wrapper">
+                    <div class="scroller">
+			    		<div id="my_holidays_list" align="center" class="subject_placeholder_div"></div>
+			    	</div>
+			    </div>
+				<div id="my_holidays_list_wrapper_ad" class="paid_ad"></div>
+			</div>
+			
+			
+			<div id="add_new_holiday" class="form background">
+				<form>
+					<div class="toolbar">
+				    	<h1>Add Holiday</h1>
+				        <a class="button back overide_button" href="#">Cancel</a>
+					</div>
+				              
+				    <ul class="rounded">
+			        	<li><input type="text" id="holiday_title" placeholder="Eg: Summer Break" /></li>
+					</ul>
+					       
+				    <ul class="rounded">
+			        	<li><input type="text" id="holiday_location" placeholder="Holiday Destination" /></li>
+					</ul>
+					       
+					<ul class="rounded">
+			        	<li><input type="text" readonly id="holiday_color_picker_textbox" name="color" value="Select Colour" /></li>
+			        </ul>
+			        
+				    <ul class="rounded">
+			        	<li><input type="text" id="holiday_start_date" readonly placeholder="Start Date" /></li>
+					</ul>
+					  
+				    <ul class="rounded">
+			        	<li><input type="text" id="holiday_end_date" readonly placeholder="End Date" /></li>
+					</ul>
+					
+					<ul class="rounded">
+			        	<li><textarea id="holiday_notes" placeholder="Notes" cols="30" rows="1"></textarea></li>
+					</ul>
+					
+					<input type="submit" class="submit whiteButton" name="action" value="Save" />
+				</form>
+			</div>
+			<!-- ******************************* END OF HOLIDAY ************************ -->
+			
+			
+			<!-- ******************************* START OF EXAMS ************************ -->
+			
+			<script src="js/exams.js" type="text/javascript"></script>
+			
+			<div id="exam_color_picker_dialog" title="Pick Colour">
+				<div id="exam_color_picker_div"></div>	
+			</div>	
+			
+			<div id="view_exams" class="edit background">
+				<div id="delete_exam_confirm" title="Delete Exam?"></div>
+			
+				<div class="toolbar">
+			    	<a class="button back overide_button" href="#">Back</a>
+			        <h1>Exams</h1>
+			        <a href="#add_new_exam" id="add_new_exam_button" class="button flip overide_button active" style="">Add</a>
+				</div>
+			              
+			    <div class="wrapper" id="my_exams_list_wrapper">
+            		<div class="scroller">    
+					    <div id="my_exams_list" class="subject_placeholder_div"></div>
+					</div>
+				</div>
+				<div id="my_exams_list_wrapper_ad" class="paid_ad"></div>
+			</div>
+			            
+			
+			<div id="add_new_exam" class="form background">
+				<form>					
+					<div class="toolbar">
+				    	<h1>Add Exam</h1>
+				        <a class="button back overide_button" href="#">Cancel</a>
+					</div>
+				           
+				    <ul class="rounded">
+			        	<!-- <li><input type="text" id="exam_title" placeholder="Enter exam subject" /></li> -->
+			        	<li><select id="exam_subject_id"></select></li>
+					</ul>
+													
+			    	<ul class="rounded">
+			        	<li><input type="text" readonly id="exam_color_picker_textbox" name="color" value="Select Colour" /></li>
+			        </ul>
+			        				
+					<ul class="rounded">
+			        	<li><input type="text" id="exam_location" placeholder="Location" /></li>
+			        </ul>                    
+			                    
+					<ul class="rounded">
+			        	<li><input type="text" id="exam_date" readonly placeholder="Date" /></li>
+					</ul>
+			                    
+					<ul class="rounded">
+			        	<li>
+			            	<select id="exam_start_time" placeholder="Exam time">
+			                	<option value=''>Start time</option>
+			                    <option value='07:00'>07:00</option>
+								<option value='07:30'>07:30</option>
+								<option value='08:00'>08:00</option>
+								<option value='08:30'>08:30</option>
+								<option value='09:00'>09:00</option>
+								<option value='09:30'>09:30</option>
+								<option value='10:00'>10:00</option>
+								<option value='10:30'>10:30</option>
+								<option value='11:00'>11:00</option>
+								<option value='11:30'>11:30</option>
+								<option value='12:00'>12:00</option>
+								<option value='12:30'>12:30</option>
+								<option value='13:00'>13:00</option>
+								<option value='13:30'>13:30</option>
+								<option value='14:00'>14:00</option>
+								<option value='14:30'>14:30</option>
+								<option value='15:00'>15.00</option>
+								<option value='15:30'>15:30</option>
+								<option value='16:00'>16:00</option>
+								<option value='16:30'>16:30</option>
+								<option value='17:00'>17:00</option>
+								<option value='17:30'>17:30</option>
+								<option value='18:00'>18:00</option>
+								<option value='18:30'>18:30</option>
+								<option value='19:00'>19:00</option>
+								<option value='19:30'>19:30</option>
+								<option value='20:00'>20:00</option>
+								<option value='20:30'>20:30</option>
+								<option value='21:00'>21:00</option>
+								<option value='21:30'>21:30</option>
+								<option value='22:00'>22:00</option>
+								<option value='22:30'>22:30</option>
+								<option value='23:00'>23:00</option>
+								<option value='23:30'>23:30</option>
+								<option value='24:00'>24:00</option>
+							</select>
+						</li>
+					</ul>
+			                    
+					<ul class="rounded">
+			        	<li>
+			            	<select id="exam_end_time" placeholder="End time">
+								<option value=''>End time</option>
+			                    <option value='07:00'>07:00</option>
+								<option value='07:30'>07:30</option>
+								<option value='08:00'>08:00</option>
+								<option value='08:30'>08:30</option>
+								<option value='09:00'>09:00</option>
+								<option value='09:30'>09:30</option>
+								<option value='10:00'>10:00</option>
+								<option value='10:30'>10:30</option>
+								<option value='11:00'>11:00</option>
+								<option value='11:30'>11:30</option>
+								<option value='12:00'>12:00</option>
+								<option value='12:30'>12:30</option>
+								<option value='13:00'>13:00</option>
+								<option value='13:30'>13:30</option>
+								<option value='14:00'>14:00</option>
+								<option value='14:30'>14:30</option>
+								<option value='15:00'>15.00</option>
+								<option value='15:30'>15:30</option>
+								<option value='16:00'>16:00</option>
+								<option value='16:30'>16:30</option>
+								<option value='17:00'>17:00</option>
+								<option value='17:30'>17:30</option>
+								<option value='18:00'>18:00</option>
+								<option value='18:30'>18:30</option>
+								<option value='19:00'>19:00</option>
+								<option value='19:30'>19:30</option>
+								<option value='20:00'>20:00</option>
+								<option value='20:30'>20:30</option>
+								<option value='21:00'>21:00</option>
+								<option value='21:30'>21:30</option>
+								<option value='22:00'>22:00</option>
+								<option value='22:30'>22:30</option>
+								<option value='23:00'>23:00</option>
+								<option value='23:30'>23:30</option>
+								<option value='24:00'>24:00</option>
+							</select>
+						</li>
+					</ul>	
+								
+					<ul class="rounded">
+			        	<li><textarea id="exam_notes" placeholder="Notes" cols="30" rows="1"></textarea></li>
+					</ul>
+					
+			        <input type="submit" class="submit whiteButton" name="action" value="Save Exam" />
+				</form>                  
+			</div>
+			<!-- ************************ END OF EXAMS ******************** -->
+			
+			<!-- ************************ START OF SUBJECT ******************** -->
+			<div id="view_subjects" class="edit background">
+				<div id="delete_subject_confirm" title="Delete Subject?"></div>
+				
+				<div class="toolbar">
+			    	<a class="button back overide_button" href="#">Back</a>
+			        <h1>Subjects</h1>
+			        <a href="#add_new_subject" id="add_new_subject_button" class="button flip overide_button active" style="">Add</a>
+				</div>
+			                  
+			   	<div class="wrapper" id="my_subjects_list_wrapper">
+                    <div class="scroller">
+			    		<div id="my_subjects_list" class="subject_placeholder_div"></div>
+			    	</div>
+			    </div>
+	           	<div id="my_subjects_list_wrapper_ad" class="paid_ad"></div> 
+			</div>
+			            
+			<div id="add_new_subject" class="form background">			
+				<div id="subject_color_picker_dialog" title="Pick Colour">
+					<div id="subject_color_picker_div"></div>	
+				</div>	
+				<form>
+					<div class="toolbar">
+				    	<h1>Add Subject</h1>
+				        <a class="button back overide_button" href="#">Cancel</a>
+					</div>
+				    
+				    <div class="wrapper full_extended_wrapper" id="add_new_subject_wrapper">
+                    	<div class="scroller">
+						    <ul class="rounded">
+					        	<li><input type="text" id="subject_title" placeholder="Subject title" /></li>
+							</ul>
+							
+							<ul class="rounded">
+					        	<li><input type="text" readonly id="subject_color_picker_textbox" name="color" value="Select Colour" /></li>
+							</ul>
+					        
+					        <ul class="rounded">
+					        	<li><input type="text" id="subject_abbreviation" placeholder="Abbreviation" /></li>
+							</ul>
+							
+							<ul class="rounded">
+					        	<li><input type="text" id="subject_location" placeholder="Location" /></li>
+							</ul>
+					        
+					        <ul class="rounded">
+					        	<li>
+					        		<select id="subject_days" placeholder="Subject Days">
+					        			<option value=''>Subject Days</option>
+					        			<option value='1'>Monday</option>
+					        			<option value='2'>Tuesday</option>
+					        			<option value='3'>Wednesday</option>
+					        			<option value='4'>Thursday</option>
+					        			<option value='5'>Friday</option>
+					        			<option value='6'>Saturday</option>
+					        			<option value='0'>Sunday</option>
+					        		</select>
+					        	</li>
+							</ul>
+							
+							<ul class="rounded">
+					        	<li>
+					            	<select id="subject_start_time" placeholder="Subject start time">
+					                	<option value=''>Start time</option>
+					                    <option value='07:00'>07:00</option>
+										<option value='07:30'>07:30</option>
+										<option value='08:00'>08:00</option>
+										<option value='08:30'>08:30</option>
+										<option value='09:00'>09:00</option>
+										<option value='09:30'>09:30</option>
+										<option value='10:00'>10:00</option>
+										<option value='10:30'>10:30</option>
+										<option value='11:00'>11:00</option>
+										<option value='11:30'>11:30</option>
+										<option value='12:00'>12:00</option>
+										<option value='12:30'>12:30</option>
+										<option value='13:00'>13:00</option>
+										<option value='13:30'>13:30</option>
+										<option value='14:00'>14:00</option>
+										<option value='14:30'>14:30</option>
+										<option value='15:00'>15.00</option>
+										<option value='15:30'>15:30</option>
+										<option value='16:00'>16:00</option>
+										<option value='16:30'>16:30</option>
+										<option value='17:00'>17:00</option>
+										<option value='17:30'>17:30</option>
+										<option value='18:00'>18:00</option>
+										<option value='18:30'>18:30</option>
+										<option value='19:00'>19:00</option>
+										<option value='19:30'>19:30</option>
+										<option value='20:00'>20:00</option>
+										<option value='20:30'>20:30</option>
+										<option value='21:00'>21:00</option>
+										<option value='21:30'>21:30</option>
+										<option value='22:00'>22:00</option>
+										<option value='22:30'>22:30</option>
+										<option value='23:00'>23:00</option>
+										<option value='23:30'>23:30</option>
+										<option value='24:00'>24:00</option>
+									</select>
+								</li>
+							</ul>
+							
+							<ul class="rounded">
+					        	<li>
+					            	<select id="subject_end_time" placeholder="Subject End time">
+										<option value=''>End time</option>
+					                    <option value='07:00'>07:00</option>
+										<option value='07:30'>07:30</option>
+										<option value='08:00'>08:00</option>
+										<option value='08:30'>08:30</option>
+										<option value='09:00'>09:00</option>
+										<option value='09:30'>09:30</option>
+										<option value='10:00'>10:00</option>
+										<option value='10:30'>10:30</option>
+										<option value='11:00'>11:00</option>
+										<option value='11:30'>11:30</option>
+										<option value='12:00'>12:00</option>
+										<option value='12:30'>12:30</option>
+										<option value='13:00'>13:00</option>
+										<option value='13:30'>13:30</option>
+										<option value='14:00'>14:00</option>
+										<option value='14:30'>14:30</option>
+										<option value='15:00'>15.00</option>
+										<option value='15:30'>15:30</option>
+										<option value='16:00'>16:00</option>
+										<option value='16:30'>16:30</option>
+										<option value='17:00'>17:00</option>
+										<option value='17:30'>17:30</option>
+										<option value='18:00'>18:00</option>
+										<option value='18:30'>18:30</option>
+										<option value='19:00'>19:00</option>
+										<option value='19:30'>19:30</option>
+										<option value='20:00'>20:00</option>
+										<option value='20:30'>20:30</option>
+										<option value='21:00'>21:00</option>
+										<option value='21:30'>21:30</option>
+										<option value='22:00'>22:00</option>
+										<option value='22:30'>22:30</option>
+										<option value='23:00'>23:00</option>
+										<option value='23:30'>23:30</option>
+										<option value='24:00'>24:00</option>
+									</select>
+								</li>
+							</ul>
+							
+							<ul class="rounded">
+					        	<li><input type="text" id="semester_start_date" readonly placeholder="Semester Start Date" /></li>
+							</ul>
+							
+							<ul class="rounded">
+					        	<li><input type="text" id="semester_end_date" readonly placeholder="Semester End Date" /></li>
+							</ul>
+							
+							<ul class="rounded">
+					        	<li><textarea id="subject_notes" placeholder="Notes" cols="30" rows="1"></textarea></li>
+							</ul>
+							
+							<ul class="rounded">
+					        	<li><input type="text" id="lecturer_name" placeholder="Lecturer Name" /></li>
+							</ul>
+							
+							<ul class="rounded">
+					        	<li><input type="text" id="lecturer_phone" placeholder="Phone Number" /></li>
+							</ul>
+							
+							<ul class="rounded">
+					        	<li><input type="text" id="lecturer_email" placeholder="Email Address" /></li>
+							</ul>
+							
+							<ul class="rounded">
+					        	<li><input type="text" id="lecturer_office_location" placeholder="Office/Location" /></li>
+							</ul>						
+					    
+					        <input type="submit" class="submit whiteButton" name="action" value="Save Subject" />
+						</div>
+					</div>		
+				</form>                  
+			</div>
+			<!-- ******************************** END OF SUBJECTS ******************************** -->
+			
+			<!-- ******************************* START OF TASKS ******************************* -->
+			<script src="js/tasks.js" type="text/javascript"></script>
+			
+			<div id="view_tasks" class="edit background">
+				<div id="complete_task_confirm" title="Complete task?"></div>
+				<div id="delete_completed_task_confirm" title="Remove completed task?"></div>
+			
+				<div class="toolbar">
+			    	<a class="button home overide_button flip" href="#add_task_summary_list">Summary</a>
+			        <h1>All Tasks</h1>
+			    	<a class="button flip" href="#add_new_task">Add</a>
+				</div>
+			    
+			    <div class="wrapper" id="my_task_list_wrapper">
+                    <div class="scroller">
+                    	<div class="subject_placeholder_div"></div>
+                    	
+			    		<div id="my_task_list" class="subject_placeholder_div"></div>
+			        </div>       
+			    </div>
+				<div id="my_task_list_wrapper_ad" class="paid_ad"></div>
+			</div>
+			      
+			<div id="add_task_summary_list" class="form background">
+				<div class="toolbar">
+			    	<a class="button home slideDown overide_button" href="#home">Home</a>
+			        <h1>My Task List</h1>
+			        <a class="button flip" href="#add_new_task_list">Add</a>
+				</div>
+				
+				<div class="wrapper" id="my_task_list_list_wrapper">
+                    <div class="scroller">
+                    	<div class="subject_placeholder_div"></div>
+                    	
+			    		<div id="my_task_list_list" class="subject_placeholder_div"></div>
+			       </div>        
+			    </div>
+				<div id="my_task_list_list_wrapper_ad" class="paid_ad"></div>
+			</div>
+			
+			<div id="add_new_task_list" class="form background">
+				<form>
+					<div class="toolbar">
+				    	<h1>Add Task Type</h1>
+				        <a class="button back overide_button" href="#">Cancel</a>
+					</div>
+				                
+				    <ul class="rounded">
+			        	<li><input type="text" id="task_list_title" placeholder="Enter task list name" /></li>
+					</ul>
+					<input type="submit" class="submit whiteButton" name="action" value="Save task list" />					
+				</form>                  
+			</div>
+			
+			<div id="add_new_task" class="form background">
+				<form>
+					<div class="toolbar">
+				    	<h1>Add Task</h1>
+				        <a class="button back overide_button" href="#">Cancel</a>
+					</div>
+				                
+				    <ul class="rounded">
+			        	<li><input type="text" id="task_title" placeholder="Enter task" /></li>
+					</ul>
+					
+				    <ul class="rounded">
+			        	<li>
+			        		<select id="task_category">  
+			        			<option value='3'>Upcoming</option>
+			        			<option value='1'>Urgent</option> 
+			        			<!-- option value='2'>Overdue</option> -->  			
+			        		</select>
+			        	</li>
+					</ul>
+					
+					<!-- ul class="rounded">
+						<li class='color_chooser'>
+							<input readonly type="text" value="#CCCC66" class="izzyColor" id="task_color_picker">
+						</li>
+					</ul--> 
+					
+				    <ul class="rounded">
+			        	<li>
+			        		<select id="task_type">       			
+			        		</select>
+			        	</li>
+					</ul>
+			
+					<ul class="rounded">
+			        	<li><input type="text" id="task_date" readonly placeholder="Task Due Date" /></li>
+					</ul>
+					
+					<ul class="rounded">
+			        	<li>
+							<select id="task_start_time">
+			                	<option value=''>Start time</option>
+			                    <option value='01:00'>01:00</option>
+								<option value='01:30'>01:30</option>
+								<option value='02:00'>02:00</option>
+								<option value='02:30'>02:30</option>
+								<option value='03:00'>03:00</option>
+								<option value='03:30'>03:30</option>
+			                    <option value='04:00'>04:00</option>
+								<option value='04:30'>04:30</option>
+								<option value='05:00'>05:00</option>
+								<option value='05:30'>05:30</option>
+								<option value='06:00'>06:00</option>
+								<option value='06:30'>06:30</option>
+			                    <option value='07:00'>07:00</option>
+								<option value='07:30'>07:30</option>
+								<option value='08:00'>08:00</option>
+								<option value='08:30'>08:30</option>
+								<option value='09:00'>09:00</option>
+								<option value='09:30'>09:30</option>
+								<option value='10:00'>10:00</option>
+								<option value='10:30'>10:30</option>
+								<option value='11:00'>11:00</option>
+								<option value='11:30'>11:30</option>
+								<option value='12:00'>12:00</option>
+								<option value='12:30'>12:30</option>
+								<option value='13:00'>13:00</option>
+								<option value='13:30'>13:30</option>
+								<option value='14:00'>14:00</option>
+								<option value='14:30'>14:30</option>
+								<option value='15:00'>15.00</option>
+								<option value='15:30'>15:30</option>
+								<option value='16:00'>16:00</option>
+								<option value='16:30'>16:30</option>
+								<option value='17:00'>17:00</option>
+								<option value='17:30'>17:30</option>
+								<option value='18:00'>18:00</option>
+								<option value='18:30'>18:30</option>
+								<option value='19:00'>19:00</option>
+								<option value='19:30'>19:30</option>
+								<option value='20:00'>20:00</option>
+								<option value='20:30'>20:30</option>
+								<option value='21:00'>21:00</option>
+								<option value='21:30'>21:30</option>
+								<option value='22:00'>22:00</option>
+								<option value='22:30'>22:30</option>
+								<option value='23:00'>23:00</option>
+								<option value='23:30'>23:30</option>
+								<option value='24:00'>24:00</option>
+							</select>
+						</li>
+					</ul>
+					
+					<ul class="rounded">
+			        	<li>
+							<select id="task_reminder_time">
+			                	<option value=''>Remind me</option>
+			                	<option value='15'>15 minutes before start</option>
+			                	<option value='30'>30 minutes before start</option>
+			                	<option value='45'>45 minutes before start</option>
+			                	<option value='60'>60 minutes before start</option>
+			                </select>
+			            </li>
+			       	</ul>
+								
+					<ul class="rounded">
+			        	<li><textarea id="task_notes" placeholder="Notes" cols="30" rows="1"></textarea></li>
+					</ul>							
+			    
+			        <input type="submit" class="submit whiteButton" name="action" value="Save task" />
+								
+				</form>                  
+			</div>
+			
+			<!-- ******************************* END OF TASKS ******************************* -->
+			
+			<!-- ******************************* START OF RECORD ******************************* -->
+			<script src="js/record.js" type="text/javascript"></script>
+	    		
+			<div id="view_records" class="edit background">
+				<div id="delete_record_confirm" title="Delete record?"></div>
+			
+				<div class="toolbar">
+			    	<a class="button back overide_button" href="#">Home</a>
+			        <h1>Record List</h1>
+			        <a href="#" class="create_new_record button flip overide_button active" style="">Record</a>
+				</div>
+                
+                <div class="wrapper record_wrapper" id="my_record_list_wrapper">
+                    <div class="scroller">
+                        <div id="my_record_list" class="subject_placeholder_div"></div>
+                    </div>
+                </div>
+            
+                <div class="play_recording">
+                    <h1></h1>
+                    <div align="center" id="progressbar"></div>
+                    <p id="timebar"></p>
+                    <div class='play_buttons_bar'>
+                        <a href="#" id="play_recording"><img width='30' src='images/playback/play.png' /></a>
+                        <a href="#" class="hidden" id="pause_recording"><img width='30' src='images/playback/pause.png' /></a>
+                        <a href="#" id="stop_recording"><img width='30' src='images/playback/stop.png' /></a>
+                    </div>
+                </div>
+			</div>
+            
+            <div id="edit_record_file" class="form background">
+                <form>
+                    <div class="toolbar">
+                        <h1>Edit Record File</h1>
+                        <a class="button back overide_button" href="#">Cancel</a>
+                    </div>
+            
+                    <ul class="rounded">
+                        <li><input type="text" id="edit_record_file_name" placeholder="File Name" /></li>
+                    </ul>
+            
+                    <ul class="rounded">
+                        <li><input type="text" id="edit_record_file_date" readonly readonly placeholder="Recoded Date" /></li>
+                    </ul>
+
+                    <ul class="rounded">
+                        <li><textarea id="edit_record_file_notes" placeholder="Notes" cols="30" rows="1"></textarea></li>
+                    </ul>
+            
+                      <input type="submit" class="submit whiteButton" name="action" value="Save" />
+                </form>
+            </div>
+			
+			
+			<!-- ******************************* END OF RECORD ******************************* -->
+			
+			<!--  ******************* WORK SCHEDULE ************************** -->		
+        	        	
+        	<div id="work_schedule_div" class="edit background">
+	            <div class="toolbar">
+			    	<a class="button back overide_button" href="#">Back</a>
+			        <h1 style='font-size:13pt;'>Work Schedule</h1>
+			        <a id="work_schedule_add_button" href="#add_work_schedule" class="button flip overide_button active" style="">Add</a>
+				</div>
+				
+				<div class="wrapper full_extended_wrapper" id="work_schedule_calendar_events_wrapper">
+                    <div class="scroller">
+						<div id='calendar'></div>
+						<div id="work_schedule_calendar_events"></div>
+					</div>
+				</div>
+				<div id="work_schedule_calendar_events_wrapper_ad" class="paid_ad"></div>
+	        </div>
+	        
+	        <div id="add_work_schedule" class="form background">
+				<form>
+					<div class="toolbar">
+				    	<h1>Add</h1>
+				        <a class="button back overide_button" href="#">Cancel</a>
+					</div>
+				    
+				    <div class="wrapper full_extended_wrapper" id="add_work_schedule_wrapper">
+                    	<div class="scroller">            
+						    <ul class="rounded">
+					        	<li><input type="text" id="work_schedule_job" placeholder="Job / Abbreviation" /></li>
+							</ul>		
+						                
+						    <!-- ul class="rounded">
+					        	<li><input type="text" id="work_schedule_abbreviation" placeholder="Abbreviation" /></li>
+							</ul-->				
+					    
+						    <ul class="rounded">
+					        	<li><input type="text" id="work_schedule_location" placeholder="Location" /></li>
+							</ul>				
+					    
+						    <ul class="rounded">
+					        	<li><input type="text" id="work_schedule_date" readonly placeholder="Date" /></li>
+							</ul>		
+							
+						    <ul class="rounded">
+					        	<li>
+									<select id="work_schedule_start_time" placeholder="Start time">
+					                	<option value=''>Start time</option>
+					                    <option value='01:00'>01:00</option>
+										<option value='01:30'>01:30</option>
+										<option value='02:00'>02:00</option>
+										<option value='02:30'>02:30</option>
+										<option value='03:00'>03:00</option>
+										<option value='03:30'>03:30</option>
+					                    <option value='04:00'>04:00</option>
+										<option value='04:30'>04:30</option>
+										<option value='05:00'>05:00</option>
+										<option value='05:30'>05:30</option>
+										<option value='06:00'>06:00</option>
+										<option value='06:30'>06:30</option>
+					                    <option value='07:00'>07:00</option>
+										<option value='07:30'>07:30</option>
+										<option value='08:00'>08:00</option>
+										<option value='08:30'>08:30</option>
+										<option value='09:00'>09:00</option>
+										<option value='09:30'>09:30</option>
+										<option value='10:00'>10:00</option>
+										<option value='10:30'>10:30</option>
+										<option value='11:00'>11:00</option>
+										<option value='11:30'>11:30</option>
+										<option value='12:00'>12:00</option>
+										<option value='12:30'>12:30</option>
+										<option value='13:00'>13:00</option>
+										<option value='13:30'>13:30</option>
+										<option value='14:00'>14:00</option>
+										<option value='14:30'>14:30</option>
+										<option value='15:00'>15.00</option>
+										<option value='15:30'>15:30</option>
+										<option value='16:00'>16:00</option>
+										<option value='16:30'>16:30</option>
+										<option value='17:00'>17:00</option>
+										<option value='17:30'>17:30</option>
+										<option value='18:00'>18:00</option>
+										<option value='18:30'>18:30</option>
+										<option value='19:00'>19:00</option>
+										<option value='19:30'>19:30</option>
+										<option value='20:00'>20:00</option>
+										<option value='20:30'>20:30</option>
+										<option value='21:00'>21:00</option>
+										<option value='21:30'>21:30</option>
+										<option value='22:00'>22:00</option>
+										<option value='22:30'>22:30</option>
+										<option value='23:00'>23:00</option>
+										<option value='23:30'>23:30</option>
+										<option value='24:00'>24:00</option>
+									</select>
+								</li>
+							</ul>		
+							
+						    <ul class="rounded">
+					        	<li>
+									<select id="work_schedule_end_time" placeholder="End time">
+					                	<option value=''>End time</option>
+					                    <option value='01:00'>01:00</option>
+										<option value='01:30'>01:30</option>
+										<option value='02:00'>02:00</option>
+										<option value='02:30'>02:30</option>
+										<option value='03:00'>03:00</option>
+										<option value='03:30'>03:30</option>
+					                    <option value='04:00'>04:00</option>
+										<option value='04:30'>04:30</option>
+										<option value='05:00'>05:00</option>
+										<option value='05:30'>05:30</option>
+										<option value='06:00'>06:00</option>
+										<option value='06:30'>06:30</option>
+					                    <option value='07:00'>07:00</option>
+										<option value='07:30'>07:30</option>
+										<option value='08:00'>08:00</option>
+										<option value='08:30'>08:30</option>
+										<option value='09:00'>09:00</option>
+										<option value='09:30'>09:30</option>
+										<option value='10:00'>10:00</option>
+										<option value='10:30'>10:30</option>
+										<option value='11:00'>11:00</option>
+										<option value='11:30'>11:30</option>
+										<option value='12:00'>12:00</option>
+										<option value='12:30'>12:30</option>
+										<option value='13:00'>13:00</option>
+										<option value='13:30'>13:30</option>
+										<option value='14:00'>14:00</option>
+										<option value='14:30'>14:30</option>
+										<option value='15:00'>15.00</option>
+										<option value='15:30'>15:30</option>
+										<option value='16:00'>16:00</option>
+										<option value='16:30'>16:30</option>
+										<option value='17:00'>17:00</option>
+										<option value='17:30'>17:30</option>
+										<option value='18:00'>18:00</option>
+										<option value='18:30'>18:30</option>
+										<option value='19:00'>19:00</option>
+										<option value='19:30'>19:30</option>
+										<option value='20:00'>20:00</option>
+										<option value='20:30'>20:30</option>
+										<option value='21:00'>21:00</option>
+										<option value='21:30'>21:30</option>
+										<option value='22:00'>22:00</option>
+										<option value='22:30'>22:30</option>
+										<option value='23:00'>23:00</option>
+										<option value='23:30'>23:30</option>
+										<option value='24:00'>24:00</option>
+									</select>
+								</li>
+							</ul>
+							
+						    <ul class="rounded">
+					        	<li>
+					        		<input type="text" id="work_schedule_break" placeholder="Break" />
+									<select id="work_schedule_break_mins_hours" placeholder="Break">
+					                	<option value='minutes'>Minutes</option>
+					                    <option value='hours'>Hours</option>
+					                </select>
+					        	</li>
+							</ul>	
+							
+						    <ul class="rounded">
+					        	<li><input type="text" id="work_schedule_rate_per_hour" placeholder="Rate per hour" /></li>
+							</ul>	
+							
+							<ul class="rounded">
+					        	<li><textarea id="work_schedule_notes" placeholder="Notes" cols="30" rows="1"></textarea></li>
+							</ul>
+							
+							<input type="submit" class="submit whiteButton" name="action" value="Save" />
+						</div>
+					</div>
+				</form>
+			</div>
+			<!--  *********************** END OF WORK SCHEDULE ********************** -->
+			
+			<!--  ************************** VIEW TIMETABLE ***************** -->
+			<script src="js/time_table.js" type="text/javascript"></script>
+		
+			<div id="view_timetable_week" class="edit timetable background">
+				<input type="hidden" id="subject_starting_time" />
+				<form>
+			    	<div class="toolbar">
+			            <a class="button home overide_button slideDown" href="#home">Home</a>
+			        	<h1>Timetable</h1>
+			            <a href="#add_new_subject" class="button flip overide_button add_subject" style="">Add</a>
+					</div>
+					
+					<div id="top_strip" class="touch">
+						<ul>
+							<li><a href="#view_timetable_week" class="cube active_timetable_page">Week</a></li>
+							<li><a href="#view_timetable_day" class="cube">Day</a></li>
+							<li><a href="#view_timetable_list" class="cube">List</a></li>
+						</ul>
+					</div>
+					
+					<div class="timetable_area">
+						<table>
+							<tr>
+								<th><img src='images/left_arrow.png' class='back_arrow' width='20' /></th>
+								<th><span id='current_timetable_week'></span></th>
+								<th><img src='images/right_arrow.png' width='20' class='forward_arrow' /></th>
+							</tr>				
+						</table>
+						
+						<table class='day_cells'>
+							<tr>
+								<th style='width:30px;'></th>
+								<th>S</th>
+								<th>M</th>
+								<th>T</th>
+								<th>W</th>
+								<th>T</th>
+								<th>F</th>
+								<th>S</th>
+							</tr>
+						</table>
+					</div>
+							
+					<div class="wrapper" id="timetable_week_wrapper">
+                    	<div class="scroller">
+                    		<div class="timetable_area">
+								<table>
+									<tr>
+										<td>
+											
+
+											<table class='tt_week time_slot' cellspacing="0" id="view_timetable_week_results_time"></table>
+											<table class='tt_week' cellspacing="0" id="view_timetable_week_results_0"></table>			
+											<table class='tt_week' cellspacing="0" id="view_timetable_week_results_1"></table>
+											<table class='tt_week' cellspacing="0" id="view_timetable_week_results_2"></table>
+											<table class='tt_week' cellspacing="0" id="view_timetable_week_results_3"></table>
+											<table class='tt_week' cellspacing="0" id="view_timetable_week_results_4"></table>
+											<table class='tt_week' cellspacing="0" id="view_timetable_week_results_5"></table>
+											<table class='tt_week' cellspacing="0" id="view_timetable_week_results_6"></table>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</form>
+	           	<div id="timetable_week_wrapper_ad" class="paid_ad"></div>
+			</div>
+			
+			<div id="view_timetable_day" class="edit timetable background">
+				<form>
+			    	<div class="toolbar">
+			            <a class="button home overide_button slideDown" href="#home">Home</a>
+			        	<h1>Timetable</h1>
+			            <a href="#add_new_subject" class="button flip overide_button add_subject" style="">Add</a>
+					</div>
+							
+					<div id="top_strip" class="touch">
+						<ul>
+							<li><a href="#view_timetable_week" class="cube">Week</a></li>
+							<li><a href="#view_timetable_day" class="cube active_timetable_page">Day</a></li>
+							<li><a href="#view_timetable_list" class="cube">List</a></li>
+						</ul>
+					</div>
+					
+					<div class="timetable_area">
+						<table>
+							<tr>
+								<th><img src='images/left_arrow.png' class='back_arrow' width='20' /></th>
+								<th><span id='current_timetable_date'></span></th>
+								<th><img src='images/right_arrow.png' width='20' class='forward_arrow' /></th>
+							</tr>				
+						</table>
+					</div>
+						
+					<div class="wrapper" id="timetable_day_wrapper">
+                    	<div class="scroller">  
+                    		<div class="timetable_area">
+								<table id="view_timetable_day_results"></table>			
+							</div>
+						</div>
+					</div>
+				</form>
+	           	<div id="timetable_day_wrapper_ad" class="paid_ad"></div>
+			</div>
+			
+			<div id="view_timetable_list" class="edit timetable background">
+		    	<div class="toolbar">
+		            <a class="button home overide_button slideDown" href="#home">Home</a>
+		        	<h1>Timetable</h1>
+		            <a href="#add_new_subject" class="button flip overide_button add_subject" style="">Add</a>
+				</div>
+				
+				<div id="top_strip" class="touch">
+					<ul>
+						<li><a href="#view_timetable_week" class="cube">Week</a></li>
+						<li><a href="#view_timetable_day" class="cube">Day</a></li>
+						<li><a href="#view_timetable_list" class="cube active_timetable_page">List</a></li>
+					</ul>
+				</div>
+				
+				
+				<div class="wrapper" id="timetable_list_wrapper">
+                    <div class="scroller">
+                    	<div class="timetable_area">					
+							<table id="view_timetable_list_results"></table>			
+						</div>
+					</div>
+				</div>
+	           	<div id="timetable_list_wrapper_ad" class="paid_ad"></div>
+			</div>
+			<!--  ***********************END OF VIEW TIMETABLE ***************** -->
+			
+			
+			<!--  ***********************START OF LIBRARY ***************** -->
+			<script src="js/library.js" type="text/javascript"></script>
+			
+			<div id="view_library_books" class="edit background">
+				<div id="delete_library_book_confirm" title="Delete Book"></div>
+			
+				<div class="toolbar">
+			    	<a class="button back overide_button" href="#">Back</a>
+			        <h1>Library</h1>
+			        <a href="#add_new_library_book" class="button flip overide_button active" style="">Add</a>
+				</div>
+			    
+			    <div class="wrapper" id="my_library_books_list_wrapper">
+                    <div class="scroller">              
+			    		<div id="my_library_books_list" class="subject_placeholder_div"></div>
+			    	</div> 
+			    </div>
+				<div id="my_library_books_list_wrapper_ad" class="paid_ad"></div>
+			</div>
+			            
+			<div id="add_new_library_book" class="form background">
+				<div id="library_color_picker_dialog" title="Pick Colour">
+					<div id="library_color_picker_div"></div>	
+				</div>	
+				
+				<form>
+					<div class="toolbar">
+				    	<h1>Add Library Book</h1>
+				        <a class="button back overide_button" href="#">Cancel</a>
+					</div>
+   
+				    <ul class="rounded">
+			        	<li><input type="text" id="library_book_title" placeholder="Book title" /></li>
+					</ul>
+					
+					<ul class="rounded">
+			        	<li><input type="text" readonly id="library_color_picker_textbox" name="color" value="Select Colour" /></li>
+			        </ul>
+					       
+				    <ul class="rounded">
+			        	<li><input type="text" id="library_book_author" placeholder="Author" /></li>
+					</ul>
+					       
+				    <!-- ul class="rounded">
+			        	<li><input type="text" id="library_book_isbn" placeholder="ISBN" /></li>
+					</ul-->
+					       
+				    <ul class="rounded">
+			        	<li><input type="text" id="library_book_subject" placeholder="Subject" /></li>
+					</ul>
+					       
+				    <ul class="rounded">
+			        	<li><input type="text" id="library_book_publisher" placeholder="Publisher" /></li>
+					</ul>
+					
+					<ul class="rounded">
+			        	<li><input type="text" id="library_book_return_date" readonly placeholder="Return Date" /></li>
+					</ul>					
+								
+					<ul class="rounded">
+			        	<li><textarea id="library_book_description" placeholder="Description" cols="30" rows="1"></textarea></li>
+					</ul>							
+			    
+			        <input type="submit" class="submit whiteButton" name="action" value="Save Book" />
+								
+				</form>                  
+			</div>
+			<!--  ***********************END OF LIBRARY ***************** -->
+			
+			<!--  ***********************START OF STUDY PLAN ***************** -->
+			<script src="js/study_plan.js" type="text/javascript"></script>
+			<div id="view_study_plans" class="edit background">
+				<div id="delete_study_plan_confirm" title="Delete Study Plan"></div>
+			
+				<div class="toolbar">
+			    	<a class="button back overide_button" href="#">Back</a>
+			        <h1>Study Plan</h1>
+			        <a href="#add_new_study_plan" id="add_new_study_plan_button" class="button flip overide_button active" style="">Add</a>
+				</div>
+				
+				<div class="wrapper" id="study_plan_calendar_events_wrapper">
+                   	<div class="scroller">  
+						<div id='study_plan_calendar'></div>
+						<div id="study_plan_calendar_events"></div>
+					</div>
+				</div>
+				<div id="study_plan_calendar_events_wrapper_ad" class="paid_ad"></div>
+			</div>
+			
+			<div id="add_new_study_plan" class="form background">
+				<form>
+					<div class="toolbar">
+				    	<h1>Add</h1>
+				        <a class="button back overide_button" href="#">Cancel</a>
+					</div>
+				    
+				               
+				    <ul class="rounded">
+			        	<li><select id="study_plan_subject_id"></select></li>
+					</ul>
+					
+					<ul class="rounded">
+			        	<li><input type="text" readonly id="study_plan_start_date" readonly placeholder="Start Date" /></li>
+					</ul>
+					
+					<ul class="rounded">
+			        	<li>
+							<select id="study_plan_start_time">
+			                	<option value=''>Start time</option>
+			                    <option value='01:00'>01:00</option>
+								<option value='01:30'>01:30</option>
+								<option value='02:00'>02:00</option>
+								<option value='02:30'>02:30</option>
+								<option value='03:00'>03:00</option>
+								<option value='03:30'>03:30</option>
+			                    <option value='04:00'>04:00</option>
+								<option value='04:30'>04:30</option>
+								<option value='05:00'>05:00</option>
+								<option value='05:30'>05:30</option>
+								<option value='06:00'>06:00</option>
+								<option value='06:30'>06:30</option>
+			                    <option value='07:00'>07:00</option>
+								<option value='07:30'>07:30</option>
+								<option value='08:00'>08:00</option>
+								<option value='08:30'>08:30</option>
+								<option value='09:00'>09:00</option>
+								<option value='09:30'>09:30</option>
+								<option value='10:00'>10:00</option>
+								<option value='10:30'>10:30</option>
+								<option value='11:00'>11:00</option>
+								<option value='11:30'>11:30</option>
+								<option value='12:00'>12:00</option>
+								<option value='12:30'>12:30</option>
+								<option value='13:00'>13:00</option>
+								<option value='13:30'>13:30</option>
+								<option value='14:00'>14:00</option>
+								<option value='14:30'>14:30</option>
+								<option value='15:00'>15.00</option>
+								<option value='15:30'>15:30</option>
+								<option value='16:00'>16:00</option>
+								<option value='16:30'>16:30</option>
+								<option value='17:00'>17:00</option>
+								<option value='17:30'>17:30</option>
+								<option value='18:00'>18:00</option>
+								<option value='18:30'>18:30</option>
+								<option value='19:00'>19:00</option>
+								<option value='19:30'>19:30</option>
+								<option value='20:00'>20:00</option>
+								<option value='20:30'>20:30</option>
+								<option value='21:00'>21:00</option>
+								<option value='21:30'>21:30</option>
+								<option value='22:00'>22:00</option>
+								<option value='22:30'>22:30</option>
+								<option value='23:00'>23:00</option>
+								<option value='23:30'>23:30</option>
+								<option value='24:00'>24:00</option>
+							</select>
+						</li>
+					</ul>
+					
+					<ul class="rounded">
+			        	<li>
+							<select id="study_plan_reminder_time">
+			                	<option value=''>Remind me</option>
+			                	<option value='15'>15 minutes before start</option>
+			                	<option value='30'>30 minutes before start</option>
+			                	<option value='45'>45 minutes before start</option>
+			                	<option value='60'>60 minutes before start</option>
+			                </select>
+			            </li>
+			       	</ul>
+					
+					<ul class="rounded">
+			        	<li><textarea id="study_plan_notes" placeholder="notes" cols="30" rows="1"></textarea></li>
+					</ul>							
+			    
+			        <input type="submit" class="submit whiteButton" name="action" value="Save" />
+										
+				</form>                  
+			</div>
+			<!--  ***********************END OF STUDY PLAN ***************** -->
+		</div><!-- id=jqt -->
+	</body>
+</html>

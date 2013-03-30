@@ -1,0 +1,195 @@
+@CHARSET "ISO-8859-1";
+.timetable #top_strip
+{
+	background-color: #3F3F41;
+}
+.timetable #top_strip ul
+{
+	margin: 0px;
+	height: 45px;
+}
+.timetable #top_strip li
+{
+	list-style-type: none;
+	float: left;
+	border-right: 1px solid #8A8A8C;
+	width:27%;
+	text-align: center;
+}
+.timetable #top_strip li a
+{
+	color:#FFFFFF;
+	text-shadow:none !important;
+}
+.active_timetable_page
+{
+	background-color: #656565;
+}
+.timetable_area table
+{
+	width:100%;
+	display: block;
+}
+.timetable_area tr td div.date
+{
+	background-color: #112637;
+	color:#ECF1F5;	
+}
+.timetable_area tr td div.details
+{
+	background-color: #000000;
+	color:#46606F;
+	overflow: hidden;
+	padding:0px;
+}
+.timetable_area tr td div.details div
+{
+	float:left;
+}
+.timetable_area tr td div.details span
+{
+	color:#7B97A5;
+}
+.timetable_area tr td div.details p
+{	
+	color:#CBCBCB;
+	font-size:18px;
+	font-weight:normal;
+}
+.timetable_area tr td div
+{
+	padding:10px 7px;
+	font-size:14px;
+}
+.timetable_area tr td
+{
+	padding:10px 7px;
+	font-size:12px;
+	font-weight: bold;
+}	
+.timetable_area th
+{
+	padding: 10px;
+	background-color: #56C1B9;
+	color:#FEFFFA;
+}
+.timetable_area td
+{
+	padding: 10px;
+	width:7%
+}
+#view_timetable_list td, #view_timetable_day_results td
+{
+	padding: 0px;
+}
+.timetable_area .a td
+{
+	background: #D0D2D1;
+	color:#5B595C;
+}
+.timetable_area .b td
+{
+	background: #B0B0AE;
+	color:#FCFCFC;
+}
+#view_timetable_day_results td .details div
+{
+}
+.add_new_subject_from_timetable
+{
+	background:none !important;
+	border:none !important;
+	box-shadow:none !important;
+	text-shadow:none !important;
+	border-radius:none !important;
+	text-overflow:none !important;
+	white-space:none !important;
+	font-size:40px !important;
+	width:30px !important;
+	height:34px !important;
+	background-repeat: no-repeat !important;
+}
+#days_of_week td
+{
+	background-color:#E6E6E6;
+}
+#view_timetable .timetable_area div
+{
+	width:100%;
+	height:100%;
+}
+.subject_color_code
+{
+	
+}
+#jqt .home
+{
+	float: left !important;
+	position: relative;
+}
+#current_timetable_date
+{
+	width:180px;
+}
+.back_arrow, .forward_arrow
+{
+	cursor: pointer;
+}
+.tt_week 
+{
+	float:left;
+	width:25px !important;
+	padding:0px !important;
+}
+#view_timetable_week_results_0,
+#view_timetable_week_results_1,
+#view_timetable_week_results_2,
+#view_timetable_week_results_3,
+#view_timetable_week_results_4,
+#view_timetable_week_results_5,
+#view_timetable_week_results_6
+{
+	color:#fff;
+	width:25px !important;
+	font-weight:normal;
+}
+.tt_week .time
+{
+	padding:2px !important;
+	width:42px !important;
+}
+.tt_week td
+{
+	padding:0px !important;
+	width:25px !important;
+	height:20px !important;
+	display:block;
+}
+.day_cells td, .day_cells th
+{
+	text-align:right;
+	background-color: #e6e6e6;
+	color:#aaaaac;
+}
+#view_timetable_week_results_time .time
+{
+	border:1px solid #e6e6e6;
+	height:34px;
+	vertical-align: middle;
+}
+.tt_week td div
+{
+	height:20px;
+}
+#timetable_week_wrapper
+{
+	top:200px;
+}
+#timetable_day_wrapper
+{
+	top:135px;
+}
+#timetable_list_wrapper
+{
+	top:90px;
+}

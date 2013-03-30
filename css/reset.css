@@ -1,0 +1,39 @@
+@CHARSET "ISO-8859-1";
+h1, h2
+{
+	text-shadow:none !important;
+}
+#jqt .toolbar > h1
+{
+	color:#FEFFFD;
+}
+#jqt ul li
+{
+}
+#jqt ul, #jqt ul.individual li
+{
+	background: none !important;
+}
+.form form ul
+{
+	margin: 5px !important;
+}
+.form form li
+{
+	padding: 5px !important;
+	background-color: #ffffff !important;
+}
+#jqt ul li textarea
+{
+	height: 50px !important;
+}
+.ui-dialog-title,
+.ui-button-text
+{
+	font-size: 80%;
+}
+.ui-button-text
+{
+	padding:5px;
+	
+}

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns     = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "com.phonegap.hello-world"
+        version   = "2.2.0">
+    <name>One Timetable</name>
+
+    <description>
+        One Timetable
+    </description>
+
+    <author href="http://onetimetable.com" email="support@onetimetable.com">
+        OneTimetable.com Team
+    </author>
+
+    <feature name="http://api.phonegap.com/1.0/device" />
+
+    <preference name="phonegap-version" value="2.2.0" />
+    <preference name="orientation"      value="default" />
+    <preference name="target-device"    value="universal" />
+    <preference name="fullscreen"       value="false" />
+
+    <icon src="icon.png" />
+    <icon src="res/icon/ios/icon-57.png"            gap:platform="ios"        width="57" height="57" />
+    <icon src="res/icon/ios/icon-72.png"            gap:platform="ios"        width="72" height="72" />
+    <icon src="res/icon/ios/icon-57-2x.png"         gap:platform="ios"        width="114" height="114" />
+    <icon src="res/icon/ios/icon-72-2x.png"         gap:platform="ios"        width="144" height="144" />
+    
+    <gap:splash src="res/screen/ios/screen-iphone-portrait.png"    gap:platform="ios"     width="320" height="480" />
+    <gap:splash src="res/screen/ios/screen-iphone-portrait-2x.png" gap:platform="ios"     width="640" height="960" />
+    <gap:splash src="res/screen/ios/screen-ipad-portrait.png"      gap:platform="ios"     width="768" height="1024" />
+    <gap:splash src="res/screen/ios/screen-ipad-landscape.png"     gap:platform="ios"     width="1024" height="768" />
+    
+    <gap:plugin name="ChildBrowser" /> <!-- latest release -->
+	<gap:plugin name="ChildBrowser" version="~3" /> <!-- for Cordova (1.9.0+) -->
+	<gap:plugin name="ChildBrowser" version="~2" /> <!-- for Cordova 1.5.0 - 1.8.1 -->
+	<gap:plugin name="ChildBrowser" version="~1" /> <!-- for PhoneGap <= 1.4.1 -->
+
+	<feature name="http://plugins.phonegap.com/ChildBrowser/2.0.0" />
+	<access origin="*" />
+</widget>

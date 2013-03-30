@@ -1,0 +1,7 @@
+@CHARSET "UTF-8";
+#school_cell div img
+{
+	position: relative;
+	left:-25px;
+	top:40px;
+}

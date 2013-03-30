@@ -1,0 +1,103 @@
+@CHARSET "ISO-8859-1";
+#add_new_exam
+{
+	padding-bottom:20px;
+}
+form input[type="submit"]
+{
+	float: right;
+}
+.toolbar
+{
+	margin-bottom: 20px;
+}
+#exam_date
+{
+    background: url("data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==") repeat scroll 0 0 transparent;
+    border: 0 none;
+    color: black;
+    display: inline-block;
+    font: 17px "Helvetica Neue",Helvetica;
+    margin-left: 0;
+    padding: 0;
+    text-shadow: 0 1px 0 #E6E6E6;
+    width: 100%;
+}
+.exam_date_time
+{
+	display: block;
+	font-weight: bold;	
+}
+.subject_placeholder_div div
+{
+	color:#FEFEFE;
+	overflow: hidden !important;
+	padding:5px 10px !important;
+}
+#my_exams_list div:FIRST-CHILD
+{
+	
+}
+.subject_placeholder_div div div.toggle_message
+{
+	background-color: #ACAEAD;
+	opacity:0.7;
+	overflow: hidden;
+}
+.subject_placeholder_div span
+{
+	float:left;
+	color:#FEFEFE;
+}
+#my_exams_list div span.toggle_message
+{
+	display: block;
+}
+.subject_placeholder_div div p
+{
+	display: block;
+	float: left;
+	color:#FEFEFE;
+	font-style: italic;
+	font-size: 90%;
+	clear: both;
+}
+.colour_code_block
+{
+	border:2px solid #000000;
+	border-radius:4px;
+	width:40px;
+	height:40px;
+	display: block;
+	margin-right: 10px;
+}
+.toggle_message
+{
+	margin-top: 0px !important;
+	display: none;
+	border-radius:0 0 5px 5px !important;
+	margin-left:5px !important;
+	margin-right:5px !important;
+}
+.toggle_message p
+{
+	display: block;
+	clear: both;
+}
+.notes
+{
+	color:#000000 !important;
+	display: block;
+}
+.izzyColor
+{
+	margin-left:10px !important;
+	width:90% !important;
+	padding:3px !important;
+}
+.color_chooser a
+{
+	float: left;
+	position: relative;
+	top:6px;
+}

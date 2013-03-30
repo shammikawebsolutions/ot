@@ -1,0 +1,55 @@
+@CHARSET "ISO-8859-1";
+.subject_placeholder, #my_subsjects div
+{
+	border-radius:6px;
+	padding:20px;
+	margin:20px;
+	border:1px solid #B3B4B6;
+	box-shadow:1px 0 0 rgba(0, 0, 0, 0.2) inset, 0 -1px 0 rgba(0, 0, 0, 0.2) inset;
+	color:#FFFDFF;
+	font-weight: bold;
+}
+.subject_placeholder div
+{
+	float: left;
+}
+.subject_placeholder div:FIRST-CHILD
+{
+	width:40px;
+}
+.subject_placeholder a
+{
+	color:#F9FEF8;
+	text-decoration: none;
+}
+#add_new_subject
+{
+	background-color: #56C1B9;
+}
+#my_subsjects
+{
+	margin-bottom: 20px;
+}
+#my_subsjects div
+{
+	background-color: #323232;
+	margin: 10px 20px;
+}
+#add_new_subjects input[type="submit"]
+{
+	float: right;
+}
+input#alert_button 
+{
+	display: block;
+	margin-top: 20px;
+}
+.simpleColorDisplay 
+{
+	font-family: Helvetica;
+	margin: 10px 0;
+}
+.button 
+{
+	clear: right;
+}

@@ -1,0 +1,72 @@
+@CHARSET "ISO-8859-1";
+#calendar, #study_plan_calendar
+{
+	width: auto;
+	margin: 0 auto;
+	overflow: hidden;
+}
+#work_schedule_calendar_events
+{
+	/*background-color: #36C;*/
+	overflow: hidden;
+}
+#work_schedule_calendar_events img
+{
+	float:right;
+	padding-right:5px;
+}
+#work_schedule_calendar_events div, , #study_plan_calendar_events div
+{
+	border-bottom:1px dotted #FFAF33 !important;
+	padding-top: 10px;
+}
+#work_schedule_calendar_events h1, #study_plan_calendar_events h1
+{
+	color:#FFAF33;
+	margin: 0px 20px !important;
+}
+#work_schedule_calendar_events h2, #study_plan_calendar_events h2
+{
+	margin-top:0px;
+	color:#FFFFFF;
+	font-size:15px;
+}
+#work_schedule_calendar_events h3, #study_plan_calendar_events h3
+{
+	margin-top:0px;
+	margin-left:20px;
+	color:#E7E4D9;
+	font-size:13px;
+	padding-bottom:10px;
+}
+.tap_to_create_event a
+{
+	text-decoration: none;
+	color:#36C;
+	padding:20px;
+	font-size:15px;
+	font-weight:bold;
+	display: block;
+}
+.study_plan_background
+{
+	background-color: gray !important;
+	border-bottom:1px dotted #FFAF33 !important;
+	padding-top: 10px;
+}
+.work_schedule_background
+{
+	background-color: blue !important;
+	border-bottom:1px dotted #FFAF33 !important;
+	padding-top: 10px;
+}
+.fc-day-content
+{
+	display:inline !important;
+}
+.fc-day-content div
+{
+	display:inline !important;
+	position:relative;
+	top:20px;
+}

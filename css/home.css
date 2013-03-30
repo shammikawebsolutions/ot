@@ -1,0 +1,49 @@
+@CHARSET "ISO-8859-1";
+#home_page_wrapper
+{
+	padding-top:0px !important;
+}
+/*******************HOLIDAY************************/
+#home_page_1 #home_main_cells #home_holidays_cell
+{
+	height:90px;
+	width:130px;
+	top:10px;
+	left:10px;
+	text-align: left;
+	clear: both;
+}
+#home_page_1 #home_main_cells #home_holidays_cell h4
+{
+	color:#55BFB7;
+	font-weight:bold;
+	font-size: 14px;
+	margin-top:10px;
+}
+#home_page_1 #home_main_cells #home_holidays_cell p
+{
+	color:#141414;
+	font-size:12px;
+}
+/*******************HOLIDAY************************/
+
+/*******************EXAMS************************/
+#home_main_cells #exams li,
+#home_main_cells #task_list li,
+#home_main_cells #study_plan li,
+#home_main_cells #work_schedule li
+{
+	color:#55BFB7;
+	color:#000;
+	/*color:#D40426;*/
+}
+
+#home_main_cells #exams li span,
+#home_main_cells #task_list li span,
+#home_main_cells #study_plan li span,
+#home_main_cells #work_schedule li span
+{
+	color:#55BFB7;
+	/*font-weight: normal;*/
+}
+/*******************EXAMS************************/

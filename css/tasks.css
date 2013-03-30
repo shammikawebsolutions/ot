@@ -1,0 +1,95 @@
+@CHARSET "ISO-8859-1";
+.toolbar
+{
+	margin-bottom:0px !important;
+}
+#summary_button
+{
+	float: left;
+}
+#my_task_list span
+{
+	clear:both;
+	display:block;
+	width:auto;
+	float: none !important;
+}
+#my_task_list div
+{
+	padding:15px !important;	
+	border-bottom:1px dotted;
+	color:#010000;
+}
+#my_task_list div p
+{
+	color:#B32121;
+}
+#my_task_list div span
+{
+	color:#252525;
+}
+#my_task_list div h3 input[type="checkbox"]
+{
+	margin-right:5px;
+}
+#my_task_list .urgent
+{
+	background-color: #FED1BE;
+}
+#my_task_list .overdue
+{
+	background-color:#FBF0AE;
+}
+#my_task_list .completed
+{
+	background-color: #FFFFFF;
+}
+#my_task_list .upcoming
+{
+	background-color:#FDA11C;
+}
+#urgent
+{
+	background-color: #E64501;
+}
+#overdue
+{
+	background-color:#FE9F11;
+}
+#completed
+{
+	background-color:#1B6A07;
+}
+#upcoming
+{
+	background-color:#595F15;
+}
+#my_task_list h2
+{
+	margin:0px !important;
+	padding:5px;
+	text-align: center;
+	color:white;
+}
+.completed LABEL 
+{
+	text-decoration: line-through;	
+}
+.task_type div span
+{
+	float: right;
+}
+#my_task_list_list a
+{
+	text-decoration: none;
+}
+#my_task_list_wrapper .subject_placeholder_div
+{
+	padding-top:0px !important;
+}
+
+#my_task_list span.delete
+{
+	float: right !important;
+	width:30px !important;
+}

@@ -1,0 +1,65 @@
+timetable day cell 
+timetable week navigation arrows
+settings section - user guide
+multi language support - later
+task complete icon on the right side of the div
+print from app
+
+
+JANUARY 18 2013
+==================
+
+- reduce height of calendar cell
+- allow delete & edit in work schedule
+- fullcalendar rendering
+
+- bounce scroll up & down
+
+- reminder alerts - i.e. alarm...
+
+- close & open & try to scroll down 
+- Record while multitasking 
+- how to run recorder in background
+- home, summary back arrow head different colour
+
+DONE
+======
+- resize home page cell size to match on iPad - DONE
+- Timetable week - DONE
+- calendar instead of dots - DONE
+- calendar event div colour change - DONE
+- tap to create events - DONE
+- always default to the current date i.e. show 20th events - DONE
+- instead of 6 rows, go to 5 - CANT BE DONE
+
+
+
+***** if no data available, remove home cell loading animation - DONE
+- advertising selling space at the bottom - DONE
+- new color picker instead of small color picker - DONE
+***** add date range for semester, when adding subject - DONE
+***** only display current semester subjects for exams, study plan - DONE
+***** display all subjcts for 'subjects' screen, give priority to current subjects - DONE
+- recorder playback - DONE 
+- recorder delete files - DONE
+- how to add school image? - DONE
+
+- add http:// by default - DONE
+- toolbar gradient bottom too dark - DONE
+- timetable day subject too long - DONE
+- home page to look like padding & margin - DONE
+- character length - DONE
+
+
+---------------------------------------
+https://gator875.hostgator.com:2083/
+chulan
+9hadYj$vCv6j
+
+
+
+- start my first subject - view subject range, according to current time - NOT IMPORTANT/LATER VERSION
+- transparent colors for background cells - NOT IMPORTANT/LATER VERSION
+- drag & drop cell save - NOT IMPORTANT/LATER VERSION
+
+- drag recording progress bar - NOT IMPORTANT/LATER VERSION

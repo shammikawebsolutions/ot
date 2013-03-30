@@ -1,0 +1,262 @@
+@CHARSET "ISO-8859-1";
+#jqt
+{
+	width:320px;
+	height:auto;
+}
+.hidden
+{
+	display: none !important;
+}
+.overide_button
+{
+	-webkit-border-image: none !important;
+}
+.error_border
+{
+	border: 2px solid red !important;
+}
+#home, #view_subjects, #add_new_subjects, .background
+{
+	background-image: url("../images/bg@2X.jpg") !important;
+}
+#home table
+{
+	text-align: center;
+	padding:10px; 
+}
+#home table td
+{
+	width:148px;
+	height: 130px;
+	background-image:url("../images/menu_option.png");
+	background-repeat:none;
+	position: relative;
+}
+#home table td a
+{
+	text-decoration: none;
+}
+#home table td h2 
+{
+    color: #FDFDFD;
+    font-size: 15px;
+    margin: 0;
+    position: relative;
+    left:10px;
+    top:5px;
+    float: left;
+    margin-bottom:10px;
+}
+#home #timetable h2,
+#home #subjects h2
+{
+	
+}
+#home #school h2
+{
+	
+}
+#home #recorder h2
+{
+	
+}
+#home_main_cells #recorder
+{
+	position: relative;
+}
+#home_main_cells #recorder div img
+{
+	position:absolute;
+	top:35px;
+	left:30px;
+}
+#home table td ul
+{
+	height:90px;
+	clear: both;
+}
+.toolbar 
+{
+	position:absolute; 
+	z-index:2;
+	top:0; 
+	left:0;
+	width:100%;
+	height:50px;
+	line-height:45px;
+	background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #D80001), color-stop(0.6, #FE2E2E), color-stop(1, #D80001));
+	padding:0;
+	color:#eee;
+	font-size:20px;
+	text-align:center;
+}
+.ui-dialog-titlebar, .ui-widget-header
+{
+	color:white !important;
+	background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #F6571D), color-stop(0.05, #F6571D), color-stop(1, #7b0a2e)) !important;
+}
+#jqt .toolbar h1
+{
+	margin-top: 5px;
+	font-family: 'Quantico', Arial, Helvetica, sans-serif;
+	text-shadow: none;
+}
+#home_settings
+{
+	background:none !important;
+	border:none !important;
+	box-shadow:none !important;
+	text-shadow:none !important;
+	border-radius:none !important;
+	text-overflow:none !important;
+	white-space:none !important;
+	background-image: url("../images/settings_toolbar.png") !important;
+	width:30px !important;
+	height:34px !important;
+	background-repeat: no-repeat !important;
+}
+#home_cell
+{
+	text-align: center;
+}
+#home_main_cells td div
+{
+	height:120px;
+	position: relative;
+	top:-6px;
+}
+#home_main_cells td ul
+{
+	border: none;
+	margin-left: 7px;
+	margin-bottom: 0px;
+	padding-top:5px;
+}
+#home_main_cells td ul li
+{
+    background: url("../images/option_arrow.png") no-repeat scroll 0 0 transparent;
+    border: medium none;
+    color: #141414;
+    font-size: 12px;
+    line-height: 20px;
+    padding: 2px 0 0 15px;
+    text-align: left;
+    background-position: 1px 6px;
+}
+#home_main_cells #exams ul li, 
+#home_main_cells #task_list ul li, 
+#home_main_cells #study_plan ul li,
+#home_main_cells #work_schedule ul li
+{
+    background:none;
+    padding-left:0px;
+}
+#home_main_cells #subjects ul
+{
+	/*maring-left:0px;
+	padding-left:0px;
+	position:relative;
+	left:-6px;
+	top:2px;*/
+}
+#home_main_cells #subjects ul li
+{
+    /*background: url("../images/option_ribbon.png") no-repeat scroll 0 0 transparent;
+    background-position:0% 10%;
+    padding: 2px 0 0 30px;*/
+}
+#home_main_cells td a
+{
+    color: #FDFDFD;
+}
+#home_main_cells td
+{
+	
+}
+.form
+{
+	margin-bottom: 20px;
+}
+.subject_placeholder_div
+{
+	padding-top:10px;
+}
+.subject_placeholder_div div div
+{
+	border-radius:6px;
+	padding:10px;
+	border:1px solid #B3B4B6;
+	box-shadow:1px 0 0 rgba(0, 0, 0, 0.2) inset, 0 -1px 0 rgba(0, 0, 0, 0.2) inset;
+	color:#FFFDFF;
+	font-weight: bold;
+	background-color: #323232;
+	margin: 0px;
+}
+.subject_placeholder_div .info
+{
+	overflow: hidden !important;
+}
+.subject_placeholder_div div div:FIRST-CHILD 
+{
+	margin-bottom: 0px !important;	
+}
+.seperator
+{
+	color:#323232 !important;
+}
+.paid_ad
+{
+    position:absolute; 
+    z-index:2;
+    bottom:0; 
+    left:0;
+    width:100%;
+    height:60px;
+    padding:0;
+    overflow:hidden;
+}
+#my_task_list_wrapper
+{
+	padding-top:0px !important;
+}
+.wrapper 
+{
+    position:absolute; 
+    z-index:1;
+    top:40px; 
+	bottom:65px;
+    left:0;
+    width:100%;
+    overflow:auto;
+}
+.full_extended_wrapper
+{
+	bottom:0px !important;
+}
+.record_wrapper
+{
+	bottom:95px !important;
+}
+.scroller
+{
+    position:absolute; 
+    z-index:1;
+    /*	-webkit-touch-callout:none;*/
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    width:100%;
+    padding:0;
+}
+.fc-event-inner, .study_plan_cell, .work_schedule_cell
+{
+	display:inline !important;
+}
+.selected_day_cell
+{
+	background-color: purple !important;
+}
+#settings a
+{
+	text-decoration: none;
+	color:#fff;
+}
